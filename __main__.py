@@ -1,16 +1,11 @@
-import argparse
+import eel
 import beliapp
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        prog="python ."
-    )
+eel.init("web")
 
-    parser.add_argument(
-        "username",
-        type=str,
-        help="target beliapp user"
-    )
+@eel.expose
+def submit(config):
+    beliapp.scrape(username=config["username"])
 
-    kwargs = parser.parse_args()
-    beliapp.scrape(username=kwargs.username)
+
+eel.start('index.html', size=(275, 275))
